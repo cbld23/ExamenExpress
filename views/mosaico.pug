@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  #container
+    h1 Mosaico
+    .mosaico-wrapper(style='border: 1px solid red; padding: 10px;')
+      .mosaico-container(style='display: flex; flex-wrap: wrap; justify-content: space-between;')
+        each personaje in personajes
+          .card(style='width: calc(25% - 20px); margin-bottom: 20px; color: black;')
+            img.card-img-top(src=personaje.image, alt=personaje.name)
+            .card-body
+              p
+                strong
+                  | #
+                  = personaje.id
+                  |  #{personaje.name}
+              p
+                strong 
+                = personaje.gender === 'Male' ? 'Hombre' : 'Mujer'
+              p
+                strong 
+                  
+                - const fecha = new Date(personaje.created)
+                = `${fecha.getMonth() + 1}/${fecha.getDate()}/${fecha.getFullYear()}`
+
+              p
+                a.btn.btn-warning(href=`/personajes/${personaje._id}/guardar`) Guardar en BD
